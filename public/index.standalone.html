@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Tempo | Yapılacaklar & Alışkanlık Takip</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.4); }
+
+    /* Light Mode Comprehensive Support */
+    html:not(.dark) {
+      color-scheme: light;
+    }
+    html.dark {
+      color-scheme: dark;
+    }
+    html:not(.dark) body {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #app-header {
+      background-color: rgba(255, 255, 255, 0.92) !important;
+      border-bottom-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #brand-title {
+      color: #0f172a !important;
+    }
+    html:not(.dark) #nav-container,
+    html:not(.dark) #mobile-nav-container {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #mobile-bottom-nav {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      border-top-color: #e2e8f0 !important;
+      color: #334155 !important;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+    }
+    html:not(.dark) #nav-container button:not(.bg-indigo-600),
+    html:not(.dark) #mobile-nav-container button:not(.bg-indigo-600) {
+      color: #64748b !important;
+    }
+    html:not(.dark) #mobile-bottom-nav button:not(.text-indigo-600) {
+      color: #64748b !important;
+    }
+    html:not(.dark) #nav-container button:not(.bg-indigo-600):hover,
+    html:not(.dark) #mobile-nav-container button:not(.bg-indigo-600):hover {
+      color: #0f172a !important;
+      background-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #btn-lang,
+    html:not(.dark) #btn-sound,
+    html:not(.dark) #btn-theme,
+    html:not(.dark) header button:not(.bg-indigo-600) {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #334155 !important;
+    }
+    html:not(.dark) #btn-theme {
+      color: #4f46e5 !important;
+    }
+    html:not(.dark) .bg-slate-900,
+    html:not(.dark) .bg-slate-900\/60,
+    html:not(.dark) .bg-slate-900\/50,
+    html:not(.dark) .bg-slate-900\/40,
+    html:not(.dark) .bg-slate-900\/30,
+    html:not(.dark) .bg-slate-900\/80,
+    html:not(.dark) .bg-slate-900\/95,
+    html:not(.dark) .bg-slate-950,
+    html:not(.dark) .bg-slate-950\/40,
+    html:not(.dark) .bg-slate-950\/50,
+    html:not(.dark) .bg-slate-950\/60,
+    html:not(.dark) .bg-slate-950\/70,
+    html:not(.dark) .bg-slate-950\/80 {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) .border-slate-800,
+    html:not(.dark) .border-slate-800\/80,
+    html:not(.dark) .border-slate-800\/60,
+    html:not(.dark) .border-slate-800\/40,
+    html:not(.dark) .border-slate-800\/30,
+    html:not(.dark) .border-slate-700 {
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .text-slate-100,
+    html:not(.dark) .text-slate-200 {
+      color: #0f172a !important;
+    }
+    html:not(.dark) .text-slate-300,
+    html:not(.dark) .text-slate-400 {
+      color: #475569 !important;
+    }
+    html:not(.dark) .text-slate-500 {
+      color: #64748b !important;
+    }
+    html:not(.dark) input,
+    html:not(.dark) select,
+    html:not(.dark) textarea {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) input::placeholder,
+    html:not(.dark) textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+    html:not(.dark) footer {
+      border-top-color: #e2e8f0 !important;
+      color: #64748b !important;
+    }
+    html:not(.dark) .bg-indigo-600,
+    html:not(.dark) .bg-indigo-600 *,
+    html:not(.dark) .bg-indigo-500,
+    html:not(.dark) .bg-indigo-500 *,
+    html:not(.dark) .bg-rose-600,
+    html:not(.dark) .bg-rose-600 *,
+    html:not(.dark) .bg-emerald-600,
+    html:not(.dark) .bg-emerald-600 * {
+      color: #ffffff !important;
+    }
+    html:not(.dark) #glow1 {
+      background-color: #818cf8 !important;
+      opacity: 0.12 !important;
+    }
+    html:not(.dark) #glow2 {
+      background-color: #a78bfa !important;
+      opacity: 0.10 !important;
+    }
+  </style>
+  <!-- INJECTED_USER_STATE_START -->
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen transition-colors duration-200">
+
+  <!-- Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div id="glow1" class="absolute -top-40 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 bg-indigo-600"></div>
+    <div id="glow2" class="absolute top-1/2 -right-40 w-96 h-96 rounded-full blur-3xl opacity-15 bg-violet-600"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    
+    <!-- Header -->
+    <header id="app-header" class="sticky top-0 z-30 transition-colors duration-200 border-b bg-slate-950/80 border-slate-800/80 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-14 sm:h-16 gap-2 sm:gap-3">
+          
+          <!-- Logo -->
+          <div class="flex items-center gap-2 sm:gap-3 shrink-0 cursor-pointer select-none" onclick="switchTab('focus')">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white shrink-0">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+            <span class="text-lg sm:text-xl font-bold tracking-tight text-white" id="brand-title">Tempo</span>
+          </div>
+
+          <!-- Navigation Tabs (Desktop / Tablet) -->
+          <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/60 border border-slate-800/60 text-xs font-medium" id="nav-container">
+            <!-- Nav buttons inserted via JS -->
+          </nav>
+
+          <!-- Top Controls -->
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <!-- Language Toggle -->
+            <button id="btn-lang" onclick="toggleLanguage()" class="px-2 sm:px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-700 text-[11px] sm:text-xs font-mono font-bold transition-all" title="Dili Değiştir / Switch Language">
+              TR · EN
+            </button>
+
+            <!-- Sound Toggle -->
+            <button id="btn-sound" onclick="toggleSound()" class="p-1.5 sm:p-2 rounded-lg border border-slate-800 bg-slate-900/50 text-slate-300 hover:text-white transition-colors" title="Ses Aç/Kapat">
+              <svg id="icon-sound" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button id="btn-theme" onclick="toggleTheme()" class="p-1.5 sm:p-2 rounded-lg border border-slate-800 bg-slate-900/50 text-amber-400 hover:text-amber-300 transition-colors" title="Karanlık/Aydınlık Tema">
+              <svg id="icon-theme" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </button>
+
+            <!-- Install / Help Button -->
+            <button onclick="openInstallModal()" class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium border border-slate-800 bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors" title="Nasıl Yüklenir">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span id="txt-install-btn">Nasıl Yüklenir?</span>
+            </button>
+
+            <!-- Daily Report Button -->
+            <button onclick="openDailyReportModal()" class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium border border-slate-800 bg-slate-900/80 text-slate-200 hover:bg-slate-800 hover:text-white transition-colors">
+              <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span id="txt-daily-report-btn">Günlük Rapor</span>
+            </button>
+
+            <!-- New Item Button -->
+            <button onclick="openTaskModal('task')" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white hover:bg-indigo-500 transition-all shadow-md shadow-indigo-600/25 active:scale-95 whitespace-nowrap">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span class="hidden sm:inline" id="txt-new-item-btn">Yeni Ekle</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Viewport Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 md:pb-12" id="main-content">
+      <!-- Dynamic view injected via JavaScript -->
+    </main>
+
+    <!-- Mobile Floating Action Button (Thumb-reachable quick add) -->
+    <button 
+      id="mobile-fab" 
+      onclick="openTaskModal('task')" 
+      aria-label="Yeni Ekle" 
+      class="fixed bottom-20 right-4 z-30 md:hidden w-13 h-13 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-xl shadow-indigo-600/40 flex items-center justify-center active:scale-90 transition-transform focus:outline-none border border-indigo-400/30"
+    >
+      <svg class="w-6 h-6 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+    </button>
+
+    <!-- Mobile Bottom Navigation Bar (Fixed for quick thumb reach) -->
+    <nav 
+      id="mobile-bottom-nav" 
+      aria-label="Mobil Navigasyon" 
+      class="fixed bottom-0 inset-x-0 z-40 md:hidden border-t backdrop-blur-xl bg-slate-950/95 border-slate-800/90 text-slate-300 grid grid-cols-5 items-center px-1 pt-1.5" 
+      style="padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.35rem)"
+    ></nav>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t mt-auto text-center text-xs border-slate-800/80 text-slate-500">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span id="footer-tagline">Tempo · Modern Yapılacaklar ve Alışkanlık Takip Sistemi (Tek Dosya HTML - En Güncel Sürüm)</span>
+        <div class="flex flex-wrap items-center justify-center gap-4 text-xs">
+          <button onclick="openInstallModal()" class="hover:text-indigo-400 transition-colors text-emerald-400" id="footer-install-link">Nasıl Yüklenir?</button>
+          <span>·</span>
+          <button onclick="openDailyReportModal()" class="hover:text-indigo-400 transition-colors" id="footer-report-link">Günlük Özet Raporu</button>
+          <span>·</span>
+          <button onclick="switchTab('analytics')" class="hover:text-indigo-400 transition-colors" id="footer-analytics-link">Haftalık Analiz</button>
+          <span>·</span>
+          <button onclick="toggleLanguage()" class="hover:text-indigo-400 transition-colors font-mono font-semibold" id="footer-lang-link">English (EN)</button>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Task / Habit Modal Container -->
+  <div id="task-modal-container"></div>
+
+  <!-- Daily Summary Modal Container -->
+  <div id="summary-modal-container"></div>
+
+  <!-- Install Modal Container -->
+  <div id="install-modal-container"></div>
+
+  <!-- Embedded Standalone Logic -->
+  <script>
+    // --- BILINGUAL I18N DICTIONARY ---
+    const i18n = {
+      tr: {
+        brand: "Tempo",
+        tagline: "Modern Yapılacaklar & Alışkanlık Takip Sistemi",
+        navFocus: "Bugünkü Odak",
+        navAll: "Tüm Öğeler",
+        navHabits: "Alışkanlık Matrisi",
+        navAnalytics: "Haftalık Analiz",
+        navSummaries: "Günlük Özetler",
+        dailyReportBtn: "Günlük Rapor",
+        newItemBtn: "Yeni Ekle",
+        installBtn: "Nasıl Yüklenir?",
+        focusTitle: "Bugünün Odak Noktaları & Günlük Rutinler",
+        focusSubtitle: "Bugün tamamlanacak {count} öğe kaldı · Akışta kalın",
+        allTitle: "Tüm Görev ve Alışkanlık Envanteri",
+        allSubtitle: "Tekrarlayan rutinlerinizi ve öncelikli görevlerinizi organize edin ve takip edin",
+        quickAddPlaceholder: "Hızlı ekle: 'Akşam 20 dk Kitap Oku' veya 'Raporu Tamamla'...",
+        searchPlaceholder: "Görev, alışkanlık veya alt görevlerde ara...",
+        allTypes: "Tüm Tipler",
+        tasksOnly: "Görevler",
+        habitsOnly: "Alışkanlıklar",
+        priority: "Öncelik",
+        allPriority: "Tüm Öncelikler",
+        highPriority: "Yüksek",
+        mediumPriority: "Orta",
+        lowPriority: "Düşük",
+        daily: "Günlük",
+        weekdays: "Hafta İçi",
+        weekends: "Hafta Sonu",
+        weekly: "Haftalık",
+        none: "Tek Seferlik",
+        sortSchedule: "Sırala: Zaman / Tarih",
+        sortPriority: "Sırala: Öncelik",
+        sortTitle: "Sırala: Başlık",
+        sortStreak: "Sırala: Seri (Streak)",
+        categoriesLabel: "Kategoriler:",
+        allCategories: "Tümü",
+        subtasks: "alt görev",
+        dayStreak: "günlük seri",
+        best: "En iyi",
+        est: "tahmin",
+        dueToday: "Bugün",
+        dueTomorrow: "Yarın",
+        dueYesterday: "Dün",
+        viewSubtasks: "Göster",
+        hideSubtasks: "Gizle",
+        edit: "Düzenle",
+        duplicate: "Kopyala",
+        delete: "Sil",
+        markComplete: "Tamamlandı",
+        markIncomplete: "Geri al",
+        noItemsFound: "Filtreye Uygun Öğe Bulunamadı",
+        noItemsFoundDesc: "Aktif filtreleri temizlemeyi deneyin veya yeni bir görev/alışkanlık ekleyin.",
+        createNewItem: "Yeni Öğe Oluştur",
+        matrixTitle: "Alışkanlık Devamlılık Matrisi",
+        matrixSubtitle: "10 günlük geçmiş takip görünümü. Geçmişi veya bugünü işaretlemek için hücrelere tıklayın.",
+        logAllDueToday: "Bugünküleri Tamamla",
+        addHabit: "Alışkanlık Ekle",
+        noHabitsTitle: "Henüz Alışkanlık Eklenmedi",
+        noHabitsDesc: "Alışkanlıklar günlük ivme kazanmanızı sağlayan rutinlerdir.",
+        createFirstHabit: "İlk Alışkanlığı Oluştur",
+        habitRoutine: "Alışkanlık Rutini",
+        cadenceCol: "Düzen",
+        currentCol: "Mevcut",
+        bestCol: "En İyi",
+        weeklyCompletionRate: "Haftalık Tamamlama Oranı",
+        completedActions: "Tamamlanan Aksiyonlar",
+        longestStreak: "En Uzun Seri",
+        activeCategories: "Aktif Kategoriler",
+        sevenDayVelocity: "7 Günlük Aktivite & Hız",
+        sevenDayVelocityDesc: "Standart görevler ve tekrarlayan alışkanlıkların günlere göre dağılımı. Detay için çubuklara tıklayın.",
+        categoryCompletionRates: "Kategori Başarı Oranları",
+        priorityExecutionBreakdown: "Öncelik Seviyesi Dağılımı",
+        aiSuggestionsTitle: "Kişiselleştirilmiş Derin AI Koçluğu & Analiz",
+        aiSuggestionsSubtitle: "Gerçek görevlerinize, teslim tarihlerine ve serilerinize göre üretilen taktiksel rehberlik.",
+        deepAiCoaching: "Derin AI Koçluğu Başlat",
+        generatingCoach: "Görevleriniz Analiz Ediliyor...",
+        copyAdvice: "Tavsiyeleri Kopyala",
+        copiedAdvice: "Kopyalandı!",
+        dailySummaryTitle: "Günlük Özet & İçgörüler",
+        productivityScore: "Üretkenlik Hız Puanı",
+        tasksLabel: "Görevler",
+        habitsLabel: "Alışkanlıklar",
+        aiInsightTitle: "Yapay Zeka Motivasyon Notu",
+        copyReport: "Raporu Kopyala",
+        copiedReport: "Kopyalandı!",
+        saveToHistory: "Geçmişe Kaydet",
+        saved: "Kaydedildi!",
+        close: "Kapat",
+        dailySummaryReports: "Gün Sonu Özet Raporları",
+        generateNewSummary: "Yeni Özet Oluştur",
+        noSummariesYet: "Henüz Günlük Özet Üretilmedi",
+        noSummariesDesc: "Üretkenlik puanınızı ve motivasyonel içgörüleri takip etmek için gün sonu özeti oluşturun.",
+        generateTodaysSummary: "Bugünün Özetini Üret",
+        createTitle: "Yeni Öğe Ekle",
+        modalSubtitle: "Parametreleri, tekrar düzenini, alt görevleri ve kategoriyi belirleyin.",
+        standardTask: "Standart Görev",
+        recurringHabit: "Tekrarlayan Alışkanlık",
+        titleLabel: "Başlık",
+        categoryLabel: "Kategori",
+        priorityLabel: "Öncelik",
+        estimatedTimeLabel: "Tahmini Süre (dakika)",
+        recurrenceLabel: "Tekrarlama Düzeni",
+        cancelBtn: "İptal",
+        createItemBtn: "Kaydet",
+        footerTagline: "Tempo · Modern Yapılacaklar ve Alışkanlık Takip Sistemi (En Güncel Sürüm)"
+      },
+      en: {
+        brand: "Tempo",
+        tagline: "Modern To-Do & Habit Tracking System",
+        navFocus: "Today's Focus",
+        navAll: "All Items",
+        navHabits: "Habit Matrix",
+        navAnalytics: "Weekly Analytics",
+        navSummaries: "Daily Summaries",
+        dailyReportBtn: "Daily Report",
+        newItemBtn: "New Item",
+        installBtn: "How to Install?",
+        focusTitle: "Today's Focus & Daily Rituals",
+        focusSubtitle: "{count} item(s) remaining for today · Stay in the flow",
+        allTitle: "Master Task & Habit Inventory",
+        allSubtitle: "Organize, schedule, and track all recurring routines and priority tasks",
+        quickAddPlaceholder: "Quick add: 'Evening 20m Read' or 'Complete Report'...",
+        searchPlaceholder: "Search tasks, habits, subtasks...",
+        allTypes: "All Types",
+        tasksOnly: "Tasks",
+        habitsOnly: "Habits",
+        priority: "Priority",
+        allPriority: "All Priorities",
+        highPriority: "High",
+        mediumPriority: "Medium",
+        lowPriority: "Low",
+        daily: "Daily",
+        weekdays: "Weekdays",
+        weekends: "Weekends",
+        weekly: "Weekly",
+        none: "One-off",
+        sortSchedule: "Sort: Schedule / Due",
+        sortPriority: "Sort: Priority",
+        sortTitle: "Sort: Title",
+        sortStreak: "Sort: Streak",
+        categoriesLabel: "Categories:",
+        allCategories: "All",
+        subtasks: "subtasks",
+        dayStreak: "day streak",
+        best: "Best",
+        est: "est",
+        dueToday: "Today",
+        dueTomorrow: "Tomorrow",
+        dueYesterday: "Yesterday",
+        viewSubtasks: "Show",
+        hideSubtasks: "Hide",
+        edit: "Edit",
+        duplicate: "Duplicate",
+        delete: "Delete",
+        markComplete: "Complete",
+        markIncomplete: "Undo",
+        noItemsFound: "No Items Found",
+        noItemsFoundDesc: "Try clearing search filters or add a new task or habit.",
+        createNewItem: "Create New Item",
+        matrixTitle: "Habit Consistency Matrix",
+        matrixSubtitle: "10-day lookback. Click any cell to toggle completion for that day.",
+        logAllDueToday: "Complete All Due Today",
+        addHabit: "Add Habit",
+        noHabitsTitle: "No Habits Tracked Yet",
+        noHabitsDesc: "Habits build automatic momentum through small daily repetitions.",
+        createFirstHabit: "Create First Habit",
+        habitRoutine: "Habit Routine",
+        cadenceCol: "Cadence",
+        currentCol: "Current",
+        bestCol: "Best",
+        weeklyCompletionRate: "Weekly Completion Rate",
+        completedActions: "Completed Actions",
+        longestStreak: "Longest Streak",
+        activeCategories: "Active Categories",
+        sevenDayVelocity: "7-Day Activity & Velocity",
+        sevenDayVelocityDesc: "Completed actions across tasks and habits. Tap bars to inspect.",
+        categoryCompletionRates: "Category Completion Rates",
+        priorityExecutionBreakdown: "Priority Level Breakdown",
+        aiSuggestionsTitle: "Personalized Deep AI Coaching & Guidance",
+        aiSuggestionsSubtitle: "Tactical advice synthesized directly from your real tasks, deadlines, and habits.",
+        deepAiCoaching: "Start Deep AI Coaching",
+        generatingCoach: "Synthesizing Advice...",
+        copyAdvice: "Copy Advice",
+        copiedAdvice: "Copied!",
+        dailySummaryTitle: "Daily Summary & Insights",
+        productivityScore: "Productivity Velocity Score",
+        tasksLabel: "Tasks",
+        habitsLabel: "Habits",
+        aiInsightTitle: "AI Motivation Insight",
+        copyReport: "Copy Report",
+        copiedReport: "Copied!",
+        saveToHistory: "Save to History",
+        saved: "Saved!",
+        close: "Close",
+        dailySummaryReports: "End-of-Day Summary Reports",
+        generateNewSummary: "Generate New Summary",
+        noSummariesYet: "No Summaries Generated Yet",
+        noSummariesDesc: "Produce an end-of-day report to track velocity and actionable reflections.",
+        generateTodaysSummary: "Generate Today's Summary",
+        createTitle: "Add New Item",
+        modalSubtitle: "Set scheduling, recurrence cadence, subtasks, and category.",
+        standardTask: "Standard Task",
+        recurringHabit: "Recurring Habit",
+        titleLabel: "Title",
+        categoryLabel: "Category",
+        priorityLabel: "Priority",
+        estimatedTimeLabel: "Estimated Time (minutes)",
+        recurrenceLabel: "Recurrence Schedule",
+        cancelBtn: "Cancel",
+        createItemBtn: "Save Item",
+        footerTagline: "Tempo · Modern To-Do & Habit Tracking System (Latest Version)"
+      }
+    };
+
+    // Category translations
+    const categoryDict = {
+      work: { tr: "İş", en: "Work" },
+      is: { tr: "İş", en: "Work" },
+      personal: { tr: "Kişisel", en: "Personal" },
+      kisisel: { tr: "Kişisel", en: "Personal" },
+      fitness: { tr: "Sağlık & Spor", en: "Fitness" },
+      saglik: { tr: "Sağlık & Spor", en: "Fitness" },
+      health: { tr: "Sağlık & Spor", en: "Fitness" },
+      study: { tr: "Öğrenim", en: "Study" },
+      ogrenim: { tr: "Öğrenim", en: "Study" },
+      education: { tr: "Eğitim", en: "Education" },
+      finance: { tr: "Finans", en: "Finance" },
+      project: { tr: "Proje", en: "Project" }
+    };
+
+    function formatCategory(name) {
+      if (!name) return "";
+      const lower = name.trim().toLowerCase().replace(/ı/g, 'i').replace(/İ/g, 'i').replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ö/g, 'o').replace(/ç/g, 'c');
+      if (categoryDict[lower]) {
+        return categoryDict[lower][currentLang] || name;
+      }
+      return name;
+    }
+
+    // Day translations
+    const dayNamesDict = {
+      Sun: { tr: "Paz", en: "Sun", fullTr: "Pazar", fullEn: "Sunday" },
+      Mon: { tr: "Pzt", en: "Mon", fullTr: "Pazartesi", fullEn: "Monday" },
+      Tue: { tr: "Sal", en: "Tue", fullTr: "Salı", fullEn: "Tuesday" },
+      Wed: { tr: "Çar", en: "Wed", fullTr: "Çarşamba", fullEn: "Wednesday" },
+      Thu: { tr: "Per", en: "Thu", fullTr: "Perşembe", fullEn: "Thursday" },
+      Fri: { tr: "Cum", en: "Fri", fullTr: "Cuma", fullEn: "Friday" },
+      Sat: { tr: "Cmt", en: "Sat", fullTr: "Cumartesi", fullEn: "Saturday" }
+    };
+
+    function formatDay(shortKey, full = false) {
+      const match = dayNamesDict[shortKey];
+      if (!match) return shortKey;
+      if (full) {
+        return currentLang === 'tr' ? match.fullTr : match.fullEn;
+      }
+      return match[currentLang] || shortKey;
+    }
+
+    // --- APPLICATION STATE ---
+    let currentLang = localStorage.getItem('tempo_language') || 'tr';
+    let currentTheme = localStorage.getItem('tempo_theme_mode') || 'dark';
+    let soundEnabled = localStorage.getItem('tempo_sound_enabled') !== 'false';
+    let activeTab = 'focus';
+    let searchQuery = '';
+    let selectedCategory = 'all';
+    let selectedPriority = 'all';
+    let selectedType = 'all';
+    let selectedSort = 'schedule';
+    let customAiReport = null;
+    let selectedDayIndex = null;
+
+    // Apply theme
+    document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+
+    // Web Audio Sound Engine
+    class SoundEngine {
+      constructor() { this.ctx = null; }
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      playCheck() {
+        if (!soundEnabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+          osc.connect(gain); gain.connect(this.ctx.destination);
+          osc.start(); osc.stop(this.ctx.currentTime + 0.23);
+        } catch(e){}
+      }
+    }
+    const sound = new SoundEngine();
+
+    // Confetti FX
+    function triggerConfetti(x, y) {
+      const count = 30;
+      const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4', '#8b5cf6'];
+      const c = document.createElement('div');
+      c.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+      document.body.appendChild(c);
+      const startX = x || window.innerWidth / 2;
+      const startY = y || window.innerHeight / 2;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 8 + 4;
+        p.style.cssText = `position:absolute;left:${startX}px;top:${startY}px;width:${size}px;height:${size}px;background:${color};border-radius:50%;opacity:1;transform:translate(-50%,-50%);transition:transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;`;
+        c.appendChild(p);
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 120 + 40;
+        const destX = Math.cos(angle) * dist;
+        const destY = Math.sin(angle) * dist - 40;
+        requestAnimationFrame(() => {
+          p.style.transform = `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(0.6)`;
+          p.style.opacity = '0';
+        });
+      }
+      setTimeout(() => { if (c.parentNode) c.parentNode.removeChild(c); }, 900);
+    }
+
+    // Default Categories
+    const defaultCategories = [
+      { id: 'cat-work', name: 'Work', color: '#6366f1' },
+      { id: 'cat-personal', name: 'Personal', color: '#10b981' },
+      { id: 'cat-fitness', name: 'Fitness', color: '#f43f5e' },
+      { id: 'cat-study', name: 'Study', color: '#f59e0b' },
+    ];
+
+    function getTodayStr() { return new Date().toISOString().split('T')[0]; }
+
+    function getPastDays(n) {
+      const days = [];
+      const today = getTodayStr();
+      const rawNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (let i = n - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split('T')[0];
+        const rawDay = rawNames[d.getDay()];
+        days.push({
+          dateStr,
+          rawDay,
+          dayName: formatDay(rawDay),
+          dayFull: formatDay(rawDay, true),
+          dayNumber: d.getDate(),
+          isToday: dateStr === today
+        });
+      }
+      return days;
+    }
+
+    // Handle Preloaded Session Data (if injected at export time)
+    if (window.__PRELOADED_TEMPO_DATA__) {
+      try {
+        const p = window.__PRELOADED_TEMPO_DATA__;
+        if (p.tasks && Array.isArray(p.tasks)) {
+          localStorage.setItem('tempo_tasks_v2', JSON.stringify(p.tasks));
+        }
+        if (p.categories && Array.isArray(p.categories)) {
+          localStorage.setItem('tempo_categories_v2', JSON.stringify(p.categories));
+        }
+        if (p.summaries && Array.isArray(p.summaries)) {
+          localStorage.setItem('tempo_summaries_v2', JSON.stringify(p.summaries));
+        }
+        if (p.language) {
+          localStorage.setItem('tempo_language', p.language);
+          currentLang = p.language;
+        }
+        if (p.theme) {
+          localStorage.setItem('tempo_theme_mode', p.theme);
+          currentTheme = p.theme;
+        }
+      } catch(e) {
+        console.warn('Preload injection error:', e);
+      }
+    }
+
+    let categories = JSON.parse(localStorage.getItem('tempo_categories_v2')) || defaultCategories;
+    let rawTasks = JSON.parse(localStorage.getItem('tempo_tasks_v2')) || [];
+    // Ensure sample tasks are deleted
+    const sampleIds = new Set(['t-1', 'h-1', 'h-2', 'h-3', 'task-1', 'habit-1', 'habit-2', 'habit-3', 'task-2', 'task-3']);
+    let tasks = rawTasks.filter(t => !sampleIds.has(t.id));
+    let summaries = JSON.parse(localStorage.getItem('tempo_summaries_v2')) || [];
+
+    function saveState() {
+      localStorage.setItem('tempo_tasks_v2', JSON.stringify(tasks));
+      localStorage.setItem('tempo_categories_v2', JSON.stringify(categories));
+      localStorage.setItem('tempo_summaries_v2', JSON.stringify(summaries));
+      localStorage.setItem('tempo_language', currentLang);
+      localStorage.setItem('tempo_theme_mode', currentTheme);
+      localStorage.setItem('tempo_sound_enabled', String(soundEnabled));
+    }
+
+    // Streak Calculator
+    function calculateStreak(history) {
+      if (!history) return 0;
+      let streak = 0;
+      let d = new Date();
+      const todayStr = getTodayStr();
+      if (!history[todayStr]) {
+        d.setDate(d.getDate() - 1);
+      }
+      for (let i = 0; i < 90; i++) {
+        const s = d.toISOString().split('T')[0];
+        if (history[s]) {
+          streak++;
+          d.setDate(d.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    // --- RENDER FUNCTIONS ---
+    function t(key) {
+      return (i18n[currentLang] && i18n[currentLang][key]) || key;
+    }
+
+    function renderNav() {
+      const today = getTodayStr();
+      const pendingFocusCount = tasks.filter(t => (t.type === 'task' ? !t.completed : !t.habitHistory || !t.habitHistory[today])).length;
+
+      const tabs = [
+        { id: 'focus', label: t('navFocus'), icon: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>', badge: pendingFocusCount },
+        { id: 'all', label: t('navAll'), icon: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>' },
+        { id: 'habits', label: t('navHabits'), icon: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>' },
+        { id: 'analytics', label: t('navAnalytics'), icon: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>' },
+        { id: 'summaries', label: t('navSummaries'), icon: '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>' },
+      ];
+
+      const html = tabs.map(tab => `
+        <button onclick="switchTab('${tab.id}')" class="px-3.5 py-1.5 rounded-lg transition-all ${
+          activeTab === tab.id
+            ? 'bg-indigo-600 text-white font-semibold shadow-sm'
+            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+        }">${tab.label}</button>
+      `).join('');
+
+      const desktopNav = document.getElementById('nav-container');
+      if (desktopNav) desktopNav.innerHTML = html;
+
+      const bottomNav = document.getElementById('mobile-bottom-nav');
+      if (bottomNav) {
+        bottomNav.innerHTML = tabs.map(tab => {
+          const isActive = activeTab === tab.id;
+          return `
+            <button onclick="switchTab('${tab.id}')" class="flex flex-col items-center justify-center py-1 px-0.5 rounded-xl transition-all relative ${
+              isActive ? 'text-indigo-400 font-bold' : 'text-slate-400 active:scale-95'
+            }">
+              <div class="p-1 rounded-lg ${isActive ? 'scale-110 bg-indigo-500/15' : ''}">
+                ${tab.icon}
+              </div>
+              <span class="text-[10px] tracking-tight leading-tight mt-0.5 truncate max-w-[64px]">${tab.label}</span>
+              ${tab.badge && tab.badge > 0 ? `
+                <span class="absolute top-0.5 right-2 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-indigo-600 text-white tabular-nums">${tab.badge}</span>
+              ` : ''}
+            </button>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('brand-title').innerText = t('brand');
+      document.getElementById('txt-daily-report-btn').innerText = t('dailyReportBtn');
+      document.getElementById('txt-new-item-btn').innerText = t('newItemBtn');
+      document.getElementById('txt-install-btn').innerText = t('installBtn');
+      document.getElementById('btn-lang').innerText = currentLang === 'tr' ? 'TR · EN' : 'EN · TR';
+      document.getElementById('footer-tagline').innerText = t('footerTagline');
+      document.getElementById('footer-report-link').innerText = t('dailyReportBtn');
+      document.getElementById('footer-analytics-link').innerText = t('navAnalytics');
+      document.getElementById('footer-install-link').innerText = t('installBtn');
+      document.getElementById('footer-lang-link').innerText = currentLang === 'tr' ? 'English (EN)' : 'Türkçe (TR)';
+    }
+
+    function switchTab(tabId) {
+      activeTab = tabId;
+      renderNav();
+      renderMain();
+    }
+
+    function renderMain() {
+      const container = document.getElementById('main-content');
+      if (activeTab === 'habits') {
+        renderHabitMatrix(container);
+      } else if (activeTab === 'analytics') {
+        renderAnalytics(container);
+      } else if (activeTab === 'summaries') {
+        renderSummaries(container);
+      } else {
+        renderTasksView(container);
+      }
+    }
+
+    // 1. Tasks / Focus View
+    function renderTasksView(container) {
+      const today = getTodayStr();
+      const filtered = tasks.filter(task => {
+        if (activeTab === 'focus') {
+          if (task.type === 'task') {
+            if (task.deadline && task.deadline !== today) return false;
+          }
+        }
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          if (!task.title.toLowerCase().includes(q) && !(task.description || '').toLowerCase().includes(q)) return false;
+        }
+        if (selectedCategory !== 'all' && task.category.toLowerCase() !== selectedCategory.toLowerCase()) return false;
+        if (selectedPriority !== 'all' && task.priority !== selectedPriority) return false;
+        if (selectedType !== 'all' && task.type !== selectedType) return false;
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        if (selectedSort === 'priority') {
+          const pOrder = { high: 0, medium: 1, low: 2 };
+          return pOrder[a.priority] - pOrder[b.priority];
+        }
+        if (selectedSort === 'title') {
+          return a.title.localeCompare(b.title);
+        }
+        if (selectedSort === 'streak') {
+          const sA = calculateStreak(a.habitHistory);
+          const sB = calculateStreak(b.habitHistory);
+          return sB - sA;
+        }
+        // default schedule
+        return (a.deadline || '9999') > (b.deadline || '9999') ? 1 : -1;
+      });
+
+      const pendingCount = tasks.filter(t => (t.type === 'task' ? !t.completed : !t.habitHistory[today])).length;
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <!-- Title & Quick Add -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">
+                ${activeTab === 'focus' ? t('focusTitle') : t('allTitle')}
+              </h1>
+              <p class="text-xs text-slate-400 mt-0.5">
+                ${activeTab === 'focus' ? t('focusSubtitle').replace('{count}', pendingCount) : t('allSubtitle')}
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Add Input -->
+          <form onsubmit="handleQuickAdd(event)" class="relative">
+            <input 
+              id="quick-input"
+              type="text" 
+              placeholder="${t('quickAddPlaceholder')}"
+              class="w-full pl-11 pr-24 py-3 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-md text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-sm"
+            />
+            <div class="absolute left-3.5 top-3.5 text-slate-500">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <button 
+              type="submit" 
+              class="absolute right-2 top-2 px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-sm flex items-center gap-1.5"
+              title="${currentLang === 'tr' ? 'Hızlı Ekle' : 'Quick Add'}"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>${currentLang === 'tr' ? 'Ekle' : 'Add'}</span>
+            </button>
+          </form>
+
+          <!-- Filter Toolbar -->
+          <div class="p-3 sm:p-4 rounded-2xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-md space-y-3">
+            <div class="flex flex-col md:flex-row gap-3">
+              <div class="relative flex-1">
+                <input 
+                  type="text" 
+                  value="${searchQuery}" 
+                  oninput="handleSearch(this.value)"
+                  placeholder="${t('searchPlaceholder')}"
+                  class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-950/70 border border-slate-800 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                />
+                <div class="absolute left-3 top-2.5 text-slate-500">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <select onchange="handleFilterType(this.value)" class="px-3 py-2 rounded-xl text-xs bg-slate-950/70 border border-slate-800 text-slate-300">
+                  <option value="all" ${selectedType === 'all' ? 'selected' : ''}>${t('allTypes')}</option>
+                  <option value="task" ${selectedType === 'task' ? 'selected' : ''}>${t('tasksOnly')}</option>
+                  <option value="habit" ${selectedType === 'habit' ? 'selected' : ''}>${t('habitsOnly')}</option>
+                </select>
+                <select onchange="handleFilterPriority(this.value)" class="px-3 py-2 rounded-xl text-xs bg-slate-950/70 border border-slate-800 text-slate-300">
+                  <option value="all" ${selectedPriority === 'all' ? 'selected' : ''}>${t('allPriority')}</option>
+                  <option value="high" ${selectedPriority === 'high' ? 'selected' : ''}>${t('highPriority')}</option>
+                  <option value="medium" ${selectedPriority === 'medium' ? 'selected' : ''}>${t('mediumPriority')}</option>
+                  <option value="low" ${selectedPriority === 'low' ? 'selected' : ''}>${t('lowPriority')}</option>
+                </select>
+                <select onchange="handleSort(this.value)" class="px-3 py-2 rounded-xl text-xs bg-slate-950/70 border border-slate-800 text-slate-300">
+                  <option value="schedule" ${selectedSort === 'schedule' ? 'selected' : ''}>${t('sortSchedule')}</option>
+                  <option value="priority" ${selectedSort === 'priority' ? 'selected' : ''}>${t('sortPriority')}</option>
+                  <option value="title" ${selectedSort === 'title' ? 'selected' : ''}>${t('sortTitle')}</option>
+                  <option value="streak" ${selectedSort === 'streak' ? 'selected' : ''}>${t('sortStreak')}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Categories Chips -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+              <span class="text-slate-500 mr-1 shrink-0 font-medium">${t('categoriesLabel')}</span>
+              <button 
+                onclick="handleFilterCategory('all')" 
+                class="px-2.5 py-1 rounded-lg transition-all shrink-0 ${
+                  selectedCategory === 'all' 
+                    ? 'bg-indigo-600 text-white font-semibold' 
+                    : 'bg-slate-800/60 text-slate-400 hover:text-slate-200'
+                }"
+              >
+                ${t('allCategories')}
+              </button>
+              ${categories.map(c => `
+                <button 
+                  onclick="handleFilterCategory('${c.name}')" 
+                  class="px-2.5 py-1 rounded-lg transition-all shrink-0 ${
+                    selectedCategory.toLowerCase() === c.name.toLowerCase() 
+                      ? 'bg-indigo-600 text-white font-semibold' 
+                      : 'bg-slate-800/60 text-slate-400 hover:text-slate-200'
+                  }"
+                >
+                  ${formatCategory(c.name)}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Tasks List -->
+          <div id="tasks-list-container" class="space-y-3">
+            ${renderTasksHtml(filtered)}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTasksHtml(filtered) {
+      if (filtered.length === 0) {
+        return `
+          <div class="p-12 text-center rounded-2xl border border-slate-800 bg-slate-900/30">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="text-base font-bold text-slate-200">${t('noItemsFound')}</h3>
+            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">${t('noItemsFoundDesc')}</p>
+            <button onclick="openTaskModal('task')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-md shadow-indigo-600/20">+ ${t('createNewItem')}</button>
+          </div>
+        `;
+      }
+
+      const today = getTodayStr();
+
+      return filtered.map(task => {
+        const isCompleted = task.type === 'habit' ? !!(task.habitHistory && task.habitHistory[today]) : !!task.completed;
+        const streak = calculateStreak(task.habitHistory);
+        const subtasks = task.subtasks || [];
+        const totalSubs = subtasks.length;
+        const doneSubs = subtasks.filter(s => s.completed).length;
+
+        const priorityBadge = {
+          high: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
+          medium: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+          low: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+        }[task.priority] || 'bg-slate-700/20 text-slate-400';
+
+        return `
+          <div class="p-4 rounded-2xl border transition-all duration-200 ${
+            isCompleted 
+              ? 'border-slate-800/40 bg-slate-900/30 opacity-70' 
+              : 'border-slate-800 bg-slate-900/60 hover:border-slate-700'
+          }">
+            <div class="flex items-start justify-between gap-3">
+              
+              <!-- Completion Checkbox -->
+              <button 
+                onclick="toggleTaskCompletion('${task.id}', event)" 
+                class="mt-0.5 w-6 h-6 rounded-lg border flex items-center justify-center transition-all shrink-0 ${
+                  isCompleted 
+                    ? 'bg-indigo-600 border-indigo-600 text-white' 
+                    : 'border-slate-700 hover:border-indigo-400 text-transparent'
+                }"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              </button>
+
+              <!-- Content Body -->
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-sm font-semibold tracking-tight ${isCompleted ? 'line-through text-slate-500' : 'text-slate-100'}">
+                    ${task.title}
+                  </span>
+
+                  <!-- Priority Badge -->
+                  <span class="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded-full border ${priorityBadge}">
+                    ${t(task.priority + 'Priority')}
+                  </span>
+
+                  <!-- Category Badge -->
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-medium">
+                    ${formatCategory(task.category)}
+                  </span>
+
+                  <!-- Type & Streak -->
+                  ${task.type === 'habit' ? `
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 font-medium flex items-center gap-1">
+                      <span>🔥 ${streak}d</span>
+                      <span>· ${t(task.recurrence || 'daily')}</span>
+                    </span>
+                  ` : ''}
+
+                  <!-- Minutes Est -->
+                  <span class="text-[10px] text-slate-400 font-mono">
+                    ~${task.estimatedMinutes || 30}m
+                  </span>
+                </div>
+
+                ${task.description ? `<p class="text-xs text-slate-400 mt-1">${task.description}</p>` : ''}
+
+                <!-- Subtasks Accordion -->
+                ${totalSubs > 0 ? `
+                  <div class="mt-3 pt-2.5 border-t border-slate-800/40">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                      <span>${doneSubs}/${totalSubs} ${t('subtasks')}</span>
+                    </div>
+                    <div class="mt-2 space-y-1.5 pl-2 border-l border-indigo-500/30">
+                      ${subtasks.map(s => `
+                        <div onclick="toggleSubtask('${task.id}', '${s.id}')" class="flex items-center gap-2 cursor-pointer text-xs ${s.completed ? 'line-through text-slate-500' : 'text-slate-300'}">
+                          <input type="checkbox" ${s.completed ? 'checked' : ''} class="rounded text-indigo-600 bg-slate-800 cursor-pointer" readonly />
+                          <span>${s.title}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Actions -->
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="duplicateTask('${task.id}')" class="p-1 text-slate-500 hover:text-slate-300 transition-colors" title="${t('duplicate')}">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </button>
+                <button onclick="deleteTask('${task.id}')" class="p-1 text-slate-500 hover:text-rose-400 transition-colors" title="${t('delete')}">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 2. Habit Matrix View
+    function renderHabitMatrix(container) {
+      const habits = tasks.filter(t => t.type === 'habit');
+      const past10 = getPastDays(10);
+      const today = getTodayStr();
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-bold flex items-center gap-2">✨ ${t('matrixTitle')}</h2>
+              <p class="text-xs text-slate-400 mt-0.5">${t('matrixSubtitle')}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="logAllDueToday()" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-indigo-500/40 bg-indigo-600/10 text-indigo-300 hover:bg-indigo-600/20">${t('logAllDueToday')}</button>
+              <button onclick="openTaskModal('habit')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white hover:bg-indigo-500">+ ${t('addHabit')}</button>
+            </div>
+          </div>
+
+          ${habits.length === 0 ? `
+            <div class="p-12 text-center rounded-2xl border border-slate-800 bg-slate-900/30">
+              <h3 class="text-base font-bold text-slate-200">${t('noHabitsTitle')}</h3>
+              <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">${t('noHabitsDesc')}</p>
+              <button onclick="openTaskModal('habit')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold">+ ${t('createFirstHabit')}</button>
+            </div>
+          ` : `
+            <div class="rounded-2xl border border-slate-800/80 bg-slate-900/60 overflow-x-auto shadow-sm">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="border-b border-slate-800 bg-slate-950/60 text-slate-400">
+                    <th class="py-3 px-3 sm:px-4 font-semibold sticky left-0 z-20 backdrop-blur-md bg-slate-950/95 border-r border-slate-800 min-w-[140px] sm:min-w-[180px]">${t('habitRoutine')}</th>
+                    <th class="py-3 px-3 text-center whitespace-nowrap">${t('cadenceCol')}</th>
+                    <th class="py-3 px-3 text-center whitespace-nowrap">${t('currentCol')}</th>
+                    ${past10.map(d => `<th class="py-3 px-2 text-center min-w-[38px] ${d.isToday ? 'text-indigo-400 font-bold bg-indigo-950/30' : ''}">${d.dayName}<br/><span class="font-mono text-[10px] text-slate-400">${d.dayNumber}</span></th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/30">
+                  ${habits.map(h => {
+                    const streak = calculateStreak(h.habitHistory);
+                    return `
+                      <tr class="hover:bg-slate-800/20 transition-colors">
+                        <td class="py-3 px-3 sm:px-4 font-semibold text-slate-200 sticky left-0 z-10 backdrop-blur-md bg-slate-900/95 border-r border-slate-800 min-w-[140px] sm:min-w-[180px]">
+                          <div class="truncate max-w-[130px] sm:max-w-none">${h.title}</div>
+                          <div class="text-[10px] text-slate-500 font-normal">${formatCategory(h.category)}</div>
+                        </td>
+                        <td class="py-3 px-3 text-center text-slate-400 capitalize whitespace-nowrap">${t(h.recurrence || 'daily')}</td>
+                        <td class="py-3 px-3 text-center font-mono font-bold text-amber-400 whitespace-nowrap">🔥 ${streak}d</td>
+                        ${past10.map(d => {
+                          const isDone = !!(h.habitHistory && h.habitHistory[d.dateStr]);
+                          return `
+                            <td class="py-2 px-1 text-center ${d.isToday ? 'bg-indigo-950/15' : ''}">
+                              <button onclick="toggleHabitDate('${h.id}', '${d.dateStr}', event)" class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center transition-all ${
+                                isDone ? 'bg-indigo-600 text-white font-bold shadow-sm' : 'bg-slate-800/50 text-slate-600 hover:border-slate-500'
+                              }">
+                                ${isDone ? '✓' : ''}
+                              </button>
+                            </td>
+                          `;
+                        }).join('')}
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // 3. Weekly Analytics View
+    function renderAnalytics(container) {
+      const past7 = getPastDays(7);
+      let totalCompleted = 0;
+      const today = getTodayStr();
+
+      const activity = past7.map(d => {
+        let count = 0;
+        const completedTasksList = [];
+        const completedHabitsList = [];
+
+        tasks.forEach(t => {
+          if (t.type === 'task' && t.completed && (!t.deadline || t.deadline === d.dateStr || d.isToday)) {
+            count++;
+            completedTasksList.push(t.title);
+          }
+          if (t.type === 'habit' && t.habitHistory && t.habitHistory[d.dateStr]) {
+            count++;
+            completedHabitsList.push(t.title);
+          }
+        });
+        totalCompleted += count;
+        return { ...d, count, completedTasksList, completedHabitsList };
+      });
+
+      const maxCount = Math.max(...activity.map(a => a.count), 4);
+      const allHabits = tasks.filter(t => t.type === 'habit');
+      const maxStreak = allHabits.length > 0 ? Math.max(...allHabits.map(h => calculateStreak(h.habitHistory)), 0) : 0;
+      
+      const totalStandard = tasks.filter(t => t.type === 'task').length;
+      const doneStandard = tasks.filter(t => t.type === 'task' && t.completed).length;
+      const completionRate = totalStandard > 0 ? Math.round((doneStandard / totalStandard) * 100) : 100;
+
+      // Active selected day (default today)
+      if (selectedDayIndex === null) {
+        selectedDayIndex = activity.findIndex(d => d.isToday);
+        if (selectedDayIndex === -1) selectedDayIndex = activity.length - 1;
+      }
+      const activeDayData = activity[selectedDayIndex] || activity[activity.length - 1];
+
+      // Category breakdown
+      const categoryCounts = {};
+      categories.forEach(c => { categoryCounts[c.name] = { total: 0, done: 0 }; });
+      tasks.forEach(t => {
+        const cat = t.category || 'Work';
+        if (!categoryCounts[cat]) categoryCounts[cat] = { total: 0, done: 0 };
+        categoryCounts[cat].total++;
+        if (t.type === 'task' && t.completed) categoryCounts[cat].done++;
+        if (t.type === 'habit' && t.habitHistory && t.habitHistory[today]) categoryCounts[cat].done++;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          
+          <!-- KPI Overview -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div class="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
+              <span class="text-xs text-slate-400">${t('weeklyCompletionRate')}</span>
+              <div class="text-2xl sm:text-3xl font-bold font-mono text-white mt-1">${completionRate}%</div>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
+              <span class="text-xs text-slate-400">${t('completedActions')}</span>
+              <div class="text-2xl sm:text-3xl font-bold font-mono text-white mt-1">${totalCompleted}</div>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
+              <span class="text-xs text-slate-400">${t('activeCategories')}</span>
+              <div class="text-2xl sm:text-3xl font-bold font-mono text-white mt-1">${categories.length}</div>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
+              <span class="text-xs text-slate-400">${t('longestStreak')}</span>
+              <div class="text-2xl sm:text-3xl font-bold font-mono text-amber-400 mt-1">🔥 ${maxStreak} ${currentLang === 'tr' ? 'gün' : 'days'}</div>
+            </div>
+          </div>
+
+          <!-- 7-Day Velocity Interactive Chart (Mobile Friendly) -->
+          <div class="p-5 sm:p-6 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <h3 class="text-base font-bold text-white">${t('sevenDayVelocity')}</h3>
+                <p class="text-xs text-slate-400">${t('sevenDayVelocityDesc')}</p>
+              </div>
+              <span class="text-xs font-mono text-indigo-400 font-semibold">${activeDayData.dayFull} (${activeDayData.count} ${currentLang === 'tr' ? 'işlem' : 'actions'})</span>
+            </div>
+
+            <!-- Chart Bars -->
+            <div class="h-44 flex items-end justify-between gap-2 sm:gap-4 px-2 sm:px-4 border-b border-slate-800/60 pb-2">
+              ${activity.map((d, idx) => {
+                const h = (d.count / maxCount) * 100;
+                const isSelected = idx === selectedDayIndex;
+                return `
+                  <div onclick="selectAnalyticsDay(${idx})" class="flex-1 flex flex-col items-center h-full justify-end cursor-pointer group">
+                    <span class="text-[10px] font-mono ${isSelected ? 'text-indigo-400 font-bold' : 'text-slate-400'} mb-1">${d.count}</span>
+                    <div class="w-full max-w-[42px] rounded-t-xl transition-all ${
+                      isSelected 
+                        ? 'bg-gradient-to-t from-indigo-600 to-violet-500 shadow-md shadow-indigo-500/30 ring-2 ring-indigo-400' 
+                        : 'bg-indigo-600/70 hover:bg-indigo-500'
+                    }" style="height:${Math.max(h, 10)}%"></div>
+                    <span class="mt-2 text-[11px] sm:text-xs font-mono font-semibold ${
+                      isSelected ? 'text-indigo-400' : 'text-slate-400'
+                    }">${d.dayName}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Selected Day Detail Inspector -->
+            <div class="p-3.5 rounded-xl border border-slate-800/70 bg-slate-950/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+              <div>
+                <span class="font-bold text-slate-200">📅 ${activeDayData.dayFull} (${activeDayData.dateStr}):</span>
+                <span class="text-slate-400 ml-1">${activeDayData.count} ${currentLang === 'tr' ? 'öğe tamamlandı.' : 'completed actions.'}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+                ${activeDayData.completedHabitsList.map(h => `<span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">⚡ ${h}</span>`).join('')}
+                ${activeDayData.completedTasksList.map(tk => `<span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">✓ ${tk}</span>`).join('')}
+                ${activeDayData.count === 0 ? `<span class="text-slate-500 italic">${currentLang === 'tr' ? 'Bu gün için kayıtlı aktivite yok' : 'No recorded activity for this day'}</span>` : ''}
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Progress Bars -->
+          <div class="p-5 sm:p-6 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-4">
+            <h3 class="text-sm font-bold text-white">${t('categoryCompletionRates')}</h3>
+            <div class="space-y-3">
+              ${Object.entries(categoryCounts).map(([catName, data]) => {
+                const pct = data.total > 0 ? Math.round((data.done / data.total) * 100) : 0;
+                return `
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-slate-300 font-medium">${formatCategory(catName)}</span>
+                      <span class="text-slate-400 font-mono">${data.done}/${data.total} (${pct}%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                      <div class="h-full bg-indigo-500 rounded-full transition-all" style="width:${pct}%"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- AI Tactical Coaching Section -->
+          <div class="p-5 sm:p-6 rounded-2xl border border-indigo-500/30 bg-slate-900/70 shadow-lg shadow-indigo-950/20 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h4 class="text-base font-bold text-white flex items-center gap-2">
+                  <span class="text-indigo-400">⚡</span> ${t('aiSuggestionsTitle')}
+                </h4>
+                <p class="text-xs text-slate-400 mt-0.5">${t('aiSuggestionsSubtitle')}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                ${customAiReport ? `
+                  <button onclick="copyAiAdvice()" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-700 bg-slate-800 text-slate-200 hover:text-white" id="btn-copy-advice">
+                    ${t('copyAdvice')}
+                  </button>
+                ` : ''}
+                <button onclick="runDeepAiCoaching()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 active:scale-95 transition-all" id="btn-run-ai">
+                  ✨ ${t('deepAiCoaching')}
+                </button>
+              </div>
+            </div>
+
+            <!-- Deep Advice Container -->
+            <div id="ai-coaching-box" class="p-4 sm:p-5 rounded-xl border border-slate-800/80 bg-slate-950/60 text-xs text-slate-300 leading-relaxed font-sans space-y-3">
+              ${customAiReport ? customAiReport : `
+                <div class="text-slate-400 py-3 text-center sm:text-left">
+                  ${currentLang === 'tr' 
+                    ? 'Yukarıdaki <strong>"Derin AI Koçluğu Başlat"</strong> butonuna basarak; listenizdeki gerçek görevlere, acil teslim tarihlerine, alışkanlık serilerinize ve çalışma dengenize göre hazırlanmış kapsamlı taktiksel rehberlik alabilirsiniz.' 
+                    : 'Click <strong>"Start Deep AI Coaching"</strong> above to synthesize tailored tactical guidance based on your real tasks, deadlines, habit streaks, and cognitive balance.'
+                  }
+                </div>
+              `}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function selectAnalyticsDay(idx) {
+      selectedDayIndex = idx;
+      renderAnalytics(document.getElementById('main-content'));
+    }
+
+    // --- DEEP AI COACHING ALGORITHM (Synthesizes REAL user tasks & habits) ---
+    function runDeepAiCoaching() {
+      const btn = document.getElementById('btn-run-ai');
+      if (btn) btn.innerText = t('generatingCoach');
+
+      setTimeout(() => {
+        const isTr = currentLang === 'tr';
+        const todayStr = getTodayStr();
+
+        const standardTasks = tasks.filter(t => t.type === 'task');
+        const habitItems = tasks.filter(t => t.type === 'habit');
+        const pendingTasks = standardTasks.filter(t => !t.completed);
+        const completedTasks = standardTasks.filter(t => t.completed);
+
+        const highPending = pendingTasks.filter(t => t.priority === 'high');
+        const overdueTasks = pendingTasks.filter(t => t.deadline && t.deadline < todayStr);
+        const dueTodayTasks = pendingTasks.filter(t => t.deadline && t.deadline === todayStr);
+
+        const totalPendingMinutes = pendingTasks.reduce((acc, t) => acc + (t.estimatedMinutes || 30), 0);
+        const habitsDoneToday = habitItems.filter(h => h.habitHistory && h.habitHistory[todayStr]);
+        const habitsPendingToday = habitItems.filter(h => !h.habitHistory || !h.habitHistory[todayStr]);
+
+        const habitDetails = habitItems.map(h => ({
+          habit: h,
+          streak: calculateStreak(h.habitHistory)
+        })).sort((a, b) => b.streak - a.streak);
+
+        const topStreakHabit = habitDetails[0];
+
+        // If workspace is empty
+        if (tasks.length === 0) {
+          customAiReport = isTr ? `
+            <div class="space-y-3">
+              <h4 class="font-bold text-sm text-indigo-400">🧭 Akıllı Başlangıç ve Üretkenlik Rehberi</h4>
+              <p>Listenizde henüz bir görev veya alışkanlık bulunmuyor. Maksimum ivme kazanmak için şu 3 pratik adımla başlayabilirsiniz:</p>
+              <ul class="list-disc list-inside space-y-1.5 pl-1">
+                <li>🎯 <strong>Günün En Önemli 1 Görevi (The One Thing):</strong> Bugün bittiğinde sizi en çok rahatlatacak tek bir yüksek öncelikli işi yukarıdaki "+ Yeni Ekle" butonundan ekleyin.</li>
+                <li>⚡ <strong>1 Temel Alışkanlık:</strong> Güne enerjik başlamak için küçük bir rutin belirleyin (örneğin: 15 dk yürüyüş veya 20 dk okuma).</li>
+                <li>⏱️ <strong>Zaman Sınırı Koyun:</strong> Göreve tahmini 30 veya 45 dakika atayarak ertelemenin önüne geçin.</li>
+              </ul>
+            </div>
+          ` : `
+            <div class="space-y-3">
+              <h4 class="font-bold text-sm text-indigo-400">🧭 Smart Starter & Momentum Guide</h4>
+              <p>You have no tasks or habits yet. Jumpstart your workflow with these 3 tactical steps:</p>
+              <ul class="list-disc list-inside space-y-1.5 pl-1">
+                <li>🎯 <strong>Identify 'The One Thing':</strong> Add one needle-moving high-priority task using "+ New Item".</li>
+                <li>⚡ <strong>Establish One Keystone Habit:</strong> Anchor a 15-minute daily routine (e.g., 20m reading).</li>
+                <li>⏱️ <strong>Timebox It:</strong> Assign a 30-45 minute estimated duration to eliminate initiation resistance.</li>
+              </ul>
+            </div>
+          `;
+          renderAnalytics(document.getElementById('main-content'));
+          return;
+        }
+
+        // Build Comprehensive Heuristic Report
+        const topCandidate = highPending[0] || overdueTasks[0] || dueTodayTasks[0] || pendingTasks[0];
+        const hours = Math.floor(totalPendingMinutes / 60);
+        const mins = totalPendingMinutes % 60;
+        const timeFormatted = isTr 
+          ? (hours > 0 ? `${hours} saat ${mins > 0 ? `${mins} dakika` : ''}` : `${mins} dakika`)
+          : (hours > 0 ? `${hours}h ${mins > 0 ? `${mins}m` : ''}` : `${mins}m`);
+
+        let reportHtml = `<div class="space-y-4">`;
+
+        // Section 1: The One Thing
+        reportHtml += `
+          <div class="p-3.5 rounded-xl border border-indigo-500/30 bg-indigo-950/30 space-y-1.5">
+            <div class="font-bold text-sm text-indigo-400 flex items-center gap-1.5">
+              <span>🎯</span> ${isTr ? '1. Günün 1 Numaralı Kritik Görevi ("The One Thing")' : '1. Core Needle-Mover ("The One Thing")'}
+            </div>
+            ${topCandidate ? `
+              <p class="font-semibold text-slate-100">
+                "${topCandidate.title}" <span class="text-indigo-300 font-mono text-[11px]">[${formatCategory(topCandidate.category)} · ${t(topCandidate.priority + 'Priority')} · ~${topCandidate.estimatedMinutes || 30}m]</span>
+              </p>
+              <p class="text-slate-300">
+                ${isTr 
+                  ? 'Gününüzün yönünü belirleyecek en kritik kilit taşı bu görevdir. E-posta veya tali bildirimlere dalmadan önce ilk saatlerinizde bu görevi tek bir odak bloğunda bitirmeyi hedefleyin.' 
+                  : 'This task anchors your daily trajectory. Tackle it first before shallow email or notification triaging.'
+                }
+              </p>
+            ` : `
+              <p class="text-emerald-400 font-semibold">${isTr ? 'Tüm görevler tamamlandı! Harika performans 🎉' : 'All standard tasks completed! Outstanding execution 🎉'}</p>
+            `}
+          </div>
+        `;
+
+        // Section 2: Deadlines & Triage
+        reportHtml += `
+          <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 space-y-1.5">
+            <div class="font-bold text-sm text-amber-400 flex items-center gap-1.5">
+              <span>⏰</span> ${isTr ? '2. Teslim Tarihi ve Aciliyet Alarmı' : '2. Deadlines & Triage Status'}
+            </div>
+            ${overdueTasks.length > 0 ? `
+              <p class="text-rose-300">⚠️ <strong>${isTr ? 'Gecikmiş Görevler:' : 'Overdue Tasks:'}</strong> ${overdueTasks.map(t => `"${t.title}" (${t.deadline})`).join(', ')}. ${isTr ? 'Bunları günün ilk yarısında hızla aradan çıkarın.' : 'Tackle these first to eliminate mental drag.'}</p>
+            ` : dueTodayTasks.length > 0 ? `
+              <p class="text-amber-300">📅 <strong>${isTr ? 'Bugün Teslim:' : 'Due Today:'}</strong> ${dueTodayTasks.map(t => `"${t.title}"`).join(', ')}. ${isTr ? 'Günün öğleden sonraki bloğunda tamamlayın.' : 'Complete these in your midday focus sprint.'}</p>
+            ` : `
+              <p class="text-emerald-400">✅ ${isTr ? 'Tarih baskısı yok; sakin ve kontrollü bir tempoda ilerleyebilirsiniz.' : 'No overdue bottlenecks detected. You hold clear operational runway.'}</p>
+            `}
+          </div>
+        `;
+
+        // Section 3: Habit Stacking & Streaks
+        reportHtml += `
+          <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 space-y-1.5">
+            <div class="font-bold text-sm text-violet-400 flex items-center gap-1.5">
+              <span>⚡</span> ${isTr ? '3. Alışkanlık Zinciri & Seri Koruma' : '3. Habit Stacking & Streaks'}
+            </div>
+            ${topStreakHabit && topStreakHabit.streak > 0 ? `
+              <p>🔥 <strong>${topStreakHabit.habit.title}</strong>: ${isTr ? `Şu an tam ${topStreakHabit.streak} günlük aktif seride! Bu zinciri asla bozmayın.` : `Active ${topStreakHabit.streak}-day streak! Protect this routine at all costs.`}</p>
+            ` : `
+              <p>${isTr ? 'İlk 3 ardışık gün nörolojik olarak en kritik eşiktir; bugünün rutinini mutlaka tamamlayın.' : 'The first 3 consecutive days build neuro-pathway momentum; log today.'}</p>
+            `}
+            ${habitsPendingToday.length > 0 ? `
+              <p class="text-slate-400 text-[11px]">💡 <em>${isTr ? 'İstifleme Tüyosu:' : 'Stacking Tip:'}</em> "${habitsPendingToday[0].title}" ${isTr ? 'alışkanlığını sabit bir günlük rutininizin (örneğin kahve veya öğle yemeği) hemen arkasına ekleyin.' : 'anchored immediately after a fixed habit like lunch or morning coffee.'}</p>
+            ` : `
+              <p class="text-emerald-400 text-[11px]">🌟 ${isTr ? 'Bugünün tüm alışkanlıkları tamamlandı!' : 'All habits checked for today!'}</p>
+            `}
+          </div>
+        `;
+
+        // Section 4: Time Blocking Plan
+        reportHtml += `
+          <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-900/50 space-y-1.5">
+            <div class="font-bold text-sm text-cyan-400 flex items-center gap-1.5">
+              <span>⏱️</span> ${isTr ? '4. Akıllı Zaman Bloklama & Odak Planı' : '4. Timeboxing & Daily Sprint Plan'}
+            </div>
+            <p>${isTr ? `Bekleyen görevleriniz yaklaşık <strong>${timeFormatted}</strong> net odaklanma süresi istiyor.` : `Pending queue requires approx. <strong>${timeFormatted}</strong> of pure deep work.`}</p>
+            <div class="p-2.5 rounded-lg bg-slate-950/70 border border-slate-800/80 font-mono text-[11px] text-slate-300 space-y-1">
+              <div>• 09:30 - 10:15 [45m] : ${pendingTasks[0] ? `"${pendingTasks[0].title}"` : 'Derin Odak'}</div>
+              <div>• 10:15 - 10:30 [15m] : ${isTr ? 'Ekranı Kapat & Yenilenme' : 'Rest & Reset'}</div>
+              ${pendingTasks[1] ? `<div>• 10:30 - 11:15 [45m] : "${pendingTasks[1].title}"</div>` : ''}
+              ${habitsPendingToday[0] ? `<div>• 17:00 - 17:20 [20m] : "${habitsPendingToday[0].title}" Rutini</div>` : ''}
+            </div>
+          </div>
+        `;
+
+        // Section 5: Golden Coaching Rule
+        reportHtml += `
+          <div class="p-3.5 rounded-xl border border-indigo-500/20 bg-indigo-500/10 space-y-1">
+            <div class="font-bold text-sm text-indigo-300 flex items-center gap-1.5">
+              <span>💡</span> ${isTr ? '5. Bu Hafta İçin Altın Koçluk Prensibi' : '5. Golden Productivity Principle'}
+            </div>
+            <p class="text-slate-300 italic">
+              ${isTr 
+                ? '"Başlama sürtünmesini aşmak başarının %80\'idir. Bir göreve direnç duyduğunuzda sadece 5 dakika yapacağınızı söyleyerek başlayın."' 
+                : '"Overcoming initiation friction is 80% of victory. When facing resistance, commit to just 5 minutes of focused effort."'
+              }
+            </p>
+          </div>
+        `;
+
+        reportHtml += `</div>`;
+        customAiReport = reportHtml;
+        renderAnalytics(document.getElementById('main-content'));
+      }, 350);
+    }
+
+    function copyAiAdvice() {
+      if (!customAiReport) return;
+      const tmp = document.createElement('div');
+      tmp.innerHTML = customAiReport;
+      const plainText = tmp.innerText || tmp.textContent;
+      navigator.clipboard.writeText(plainText);
+      const btn = document.getElementById('btn-copy-advice');
+      if (btn) {
+        btn.innerText = t('copiedAdvice');
+        setTimeout(() => { btn.innerText = t('copyAdvice'); }, 2000);
+      }
+    }
+
+    // 4. Summaries View
+    function renderSummaries(container) {
+      if (summaries.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 text-center rounded-2xl border border-slate-800 bg-slate-900/30">
+            <h3 class="text-lg font-bold">${t('noSummariesYet')}</h3>
+            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">${t('noSummariesDesc')}</p>
+            <button onclick="openDailyReportModal()" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold">✨ ${t('generateTodaysSummary')}</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-white">${t('dailySummaryReports')}</h2>
+            <button onclick="openDailyReportModal()" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white">✨ ${t('generateNewSummary')}</button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${summaries.map(s => `
+              <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-indigo-400 font-bold">${s.date}</span>
+                  <span class="text-2xl font-bold font-mono text-white">${s.score}%</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">${s.insight}</p>
+                <div class="text-[11px] italic text-slate-500">${s.quote}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // --- ACTIONS & HANDLERS ---
+    function handleQuickAdd(e) {
+      e.preventDefault();
+      const input = document.getElementById('quick-input');
+      const val = (input ? input.value : '').trim();
+      if (!val) return;
+      const isHabit = val.toLowerCase().includes('habit') || val.toLowerCase().includes('alışkanlık') || val.toLowerCase().includes('günlük') || val.toLowerCase().includes('daily');
+      tasks.unshift({
+        id: 'task-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+        title: val,
+        type: isHabit ? 'habit' : 'task',
+        category: categories[0]?.name || 'Work',
+        priority: 'medium',
+        estimatedMinutes: 30,
+        deadline: getTodayStr(),
+        recurrence: isHabit ? 'daily' : 'none',
+        habitHistory: {},
+        completed: false,
+        subtasks: []
+      });
+      saveState();
+      input.value = '';
+      renderTasksList();
+    }
+
+    function toggleTaskCompletion(id, e) {
+      const today = getTodayStr();
+      const task = tasks.find(t => t.id === id);
+      if (!task) return;
+      sound.playCheck();
+      if (task.type === 'habit') {
+        if (!task.habitHistory) task.habitHistory = {};
+        const wasDone = !!task.habitHistory[today];
+        if (!wasDone) triggerConfetti(e ? e.clientX : undefined, e ? e.clientY : undefined);
+        if (wasDone) delete task.habitHistory[today];
+        else task.habitHistory[today] = true;
+      } else {
+        if (!task.completed) triggerConfetti(e ? e.clientX : undefined, e ? e.clientY : undefined);
+        task.completed = !task.completed;
+      }
+      saveState();
+      renderTasksList();
+    }
+
+    function toggleHabitDate(id, dateStr, e) {
+      const task = tasks.find(t => t.id === id);
+      if (!task) return;
+      sound.playCheck();
+      if (!task.habitHistory) task.habitHistory = {};
+      if (!task.habitHistory[dateStr]) triggerConfetti(e ? e.clientX : undefined, e ? e.clientY : undefined);
+      if (task.habitHistory[dateStr]) delete task.habitHistory[dateStr];
+      else task.habitHistory[dateStr] = true;
+      saveState();
+      if (activeTab === 'habits') renderHabitMatrix(document.getElementById('main-content'));
+      else renderTasksList();
+    }
+
+    function toggleSubtask(taskId, subId) {
+      const task = tasks.find(t => t.id === taskId);
+      if (!task || !task.subtasks) return;
+      const sub = task.subtasks.find(s => s.id === subId);
+      if (sub) sub.completed = !sub.completed;
+      saveState();
+      renderTasksList();
+    }
+
+    function duplicateTask(id) {
+      const tsk = tasks.find(x => x.id === id);
+      if (!tsk) return;
+      const copySuffix = currentLang === 'tr' ? '(Kopya)' : '(Copy)';
+      tasks.unshift({ ...tsk, id: 'task-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4), title: tsk.title + ' ' + copySuffix, completed: false, habitHistory: {} });
+      saveState();
+      renderTasksList();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(x => x.id !== id);
+      saveState();
+      renderTasksList();
+    }
+
+    function logAllDueToday() {
+      const today = getTodayStr();
+      tasks.filter(t => t.type === 'habit').forEach(h => {
+        if (!h.habitHistory) h.habitHistory = {};
+        h.habitHistory[today] = true;
+      });
+      sound.playCheck();
+      triggerConfetti();
+      saveState();
+      renderHabitMatrix(document.getElementById('main-content'));
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      renderTasksList();
+    }
+
+    function handleFilterCategory(cat) {
+      selectedCategory = cat;
+      renderTasksView(document.getElementById('main-content'));
+    }
+
+    function handleFilterPriority(p) {
+      selectedPriority = p;
+      renderTasksList();
+    }
+
+    function handleFilterType(tp) {
+      selectedType = tp;
+      renderTasksList();
+    }
+
+    function handleSort(st) {
+      selectedSort = st;
+      renderTasksList();
+    }
+
+    function renderTasksList() {
+      if (activeTab === 'focus' || activeTab === 'all') {
+        const container = document.getElementById('main-content');
+        if (container) renderTasksView(container);
+      }
+    }
+
+    // Modal: Daily Report
+    function openDailyReportModal() {
+      const today = getTodayStr();
+      const doneTasks = tasks.filter(t => t.type === 'task' && t.completed).length;
+      const totalTasks = tasks.filter(t => t.type === 'task').length || 1;
+      const doneHabits = tasks.filter(t => t.type === 'habit' && t.habitHistory && t.habitHistory[today]).length;
+      const totalHabits = tasks.filter(t => t.type === 'habit').length || 1;
+      const score = Math.round(((doneTasks / totalTasks) * 0.6 + (doneHabits / totalHabits) * 0.4) * 100);
+
+      const insight = currentLang === 'tr'
+        ? "Bugün kritik odaklarınızı başarıyla korudunuz. İvmenizi yarın sabahki ilk görev bloğuna taşıyın!"
+        : "Exceptional discipline demonstrated across core objectives today. Carry momentum forward!";
+
+      const quote = currentLang === 'tr'
+        ? '"Mükemmellik bir eylem değil, bir alışkanlıktır." — Aristoteles'
+        : '"Success is the product of daily habits—not once-in-a-lifetime transformations." — James Clear';
+
+      const container = document.getElementById('summary-modal-container');
+      container.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md">
+          <div class="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900/95 p-5 sm:p-6 shadow-2xl text-slate-100 space-y-4 max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 class="text-lg font-bold">${t('dailySummaryTitle')}</h2>
+              <button onclick="closeModal('summary-modal-container')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <div class="p-4 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-indigo-400 font-semibold uppercase">${t('productivityScore')}</span>
+                <div class="text-3xl font-extrabold font-mono text-white">${score}%</div>
+              </div>
+              <div class="text-right text-xs font-mono text-slate-300">
+                <div>${t('tasksLabel')}: ${doneTasks}/${totalTasks}</div>
+                <div>${t('habitsLabel')}: ${doneHabits}/${totalHabits}</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl border border-slate-800 bg-slate-950/40 text-xs text-slate-300 leading-relaxed">
+              <span class="font-bold text-indigo-400">✨ ${t('aiInsightTitle')}:</span> ${insight}
+            </div>
+            <div class="text-xs italic text-slate-400">${quote}</div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-800">
+              <button onclick="closeModal('summary-modal-container')" class="px-4 py-2 rounded-xl text-xs border border-slate-700">${t('close')}</button>
+              <button onclick="saveSummaryRecord('${today}', ${score}, '${insight.replace(/'/g, "\\'")}', '${quote.replace(/'/g, "\\'")}')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white">${t('saveToHistory')}</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveSummaryRecord(date, score, insight, quote) {
+      summaries.unshift({ id: 'sum-' + Date.now(), date, score, insight, quote });
+      saveState();
+      closeModal('summary-modal-container');
+      if (activeTab === 'summaries') renderSummaries(document.getElementById('main-content'));
+    }
+
+    // Modal: Task / Habit Creation
+    function openTaskModal(defaultType) {
+      const container = document.getElementById('task-modal-container');
+      container.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md">
+          <div class="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900/95 p-5 sm:p-6 shadow-2xl text-slate-100 space-y-4 max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 class="text-lg font-bold">${t('createTitle')}</h2>
+              <button onclick="closeModal('task-modal-container')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <form onsubmit="handleCreateTask(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">${t('titleLabel')}</label>
+                <input id="modal-title" type="text" required placeholder="${currentLang === 'tr' ? 'Örn: Sabah 20 dk Koşu veya Kod İnceleme' : 'e.g., Morning 20m Run'}" class="w-full px-3.5 py-2 rounded-xl text-xs bg-slate-950/60 border border-slate-800 text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 mb-1">${t('categoryLabel')}</label>
+                  <select id="modal-category" class="w-full px-3 py-1.5 rounded-xl text-xs bg-slate-950 border border-slate-800 text-slate-200">
+                    ${categories.map(c => `<option value="${c.name}">${formatCategory(c.name)}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 mb-1">${t('priorityLabel')}</label>
+                  <select id="modal-priority" class="w-full px-3 py-1.5 rounded-xl text-xs bg-slate-950 border border-slate-800 text-slate-200">
+                    <option value="high">${t('highPriority')}</option>
+                    <option value="medium" selected>${t('mediumPriority')}</option>
+                    <option value="low">${t('lowPriority')}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 mb-1">${t('recurrenceLabel')}</label>
+                  <select id="modal-recurrence" class="w-full px-3 py-1.5 rounded-xl text-xs bg-slate-950 border border-slate-800 text-slate-200">
+                    <option value="none" ${defaultType === 'task' ? 'selected' : ''}>${t('none')}</option>
+                    <option value="daily" ${defaultType === 'habit' ? 'selected' : ''}>${t('daily')}</option>
+                    <option value="weekdays">${t('weekdays')}</option>
+                    <option value="weekends">${t('weekends')}</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-400 mb-1">${t('estimatedTimeLabel')}</label>
+                  <input id="modal-minutes" type="number" value="30" class="w-full px-3 py-1.5 rounded-xl text-xs bg-slate-950 border border-slate-800 text-slate-200" />
+                </div>
+              </div>
+              <div class="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                <button type="button" onclick="closeModal('task-modal-container')" class="px-4 py-2 rounded-xl text-xs border border-slate-700">${t('cancelBtn')}</button>
+                <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white">${t('createItemBtn')}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleCreateTask(e) {
+      e.preventDefault();
+      const title = document.getElementById('modal-title').value.trim();
+      const category = document.getElementById('modal-category').value;
+      const priority = document.getElementById('modal-priority').value;
+      const recurrence = document.getElementById('modal-recurrence').value;
+      const estimatedMinutes = Number(document.getElementById('modal-minutes').value) || 30;
+
+      tasks.unshift({
+        id: 'task-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+        title,
+        type: recurrence !== 'none' ? 'habit' : 'task',
+        category,
+        priority,
+        estimatedMinutes,
+        deadline: getTodayStr(),
+        recurrence,
+        habitHistory: {},
+        completed: false,
+        subtasks: []
+      });
+
+      saveState();
+      closeModal('task-modal-container');
+      renderMain();
+    }
+
+    // Modal: How to Install / Setup
+    function openInstallModal() {
+      const isTr = currentLang === 'tr';
+      const container = document.getElementById('install-modal-container');
+      container.innerHTML = `
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+          <div class="relative w-full max-w-xl rounded-3xl border border-slate-800 bg-slate-900/95 p-6 shadow-2xl text-slate-100 space-y-4 max-h-[85vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 class="text-base font-bold flex items-center gap-2">
+                <span>📱</span> ${isTr ? 'Tempo Nasıl Yüklenir & Kullanılır?' : 'How to Install & Use Tempo?'}
+              </h2>
+              <button onclick="closeModal('install-modal-container')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <!-- Mobile Instructions -->
+            <div class="p-4 rounded-2xl border border-slate-800 bg-slate-950/50 space-y-2">
+              <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">
+                ${isTr ? '1. Telefona Uygulama Olarak Ekleme (iOS & Android)' : '1. Install to Phone (iOS & Android)'}
+              </span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                  <span class="font-bold text-blue-400">iPhone (Safari):</span>
+                  <p>${isTr ? 'Alttaki Paylaş butonuna basıp <strong>"Ana Ekrana Ekle"</strong> seçeneğini seçin.' : 'Tap Share button and select <strong>"Add to Home Screen"</strong>.'}</p>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                  <span class="font-bold text-emerald-400">Android (Chrome):</span>
+                  <p>${isTr ? 'Sağ üstteki 3 noktaya basıp <strong>"Uygulamayı Yükle"</strong> seçeneğini seçin.' : 'Tap the 3 dots menu and select <strong>"Install App"</strong>.'}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Standalone Offline HTML -->
+            <div class="p-4 rounded-2xl border border-indigo-500/30 bg-indigo-950/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">
+                  ${isTr ? '2. Tek Başına Çalışan HTML Dosyası' : '2. Standalone Single-File HTML'}
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold">${isTr ? 'İnternetsiz Çalışır' : 'Works Offline'}</span>
+              </div>
+              <p class="text-xs text-slate-300">
+                ${isTr 
+                  ? 'Sunucu veya node.js kurulumu gerektirmez. Dosyayı bilgisayarınıza indirip istediğiniz zaman çift tıklayarak internetsiz bile kullanabilirsiniz. Tüm görevleriniz tarayıcınızda güvenle saklanır.' 
+                  : 'Zero build steps or server required. Double-click the file to open it in any browser even without an active internet connection.'
+                }
+              </p>
+            </div>
+
+            <!-- Vercel Deployment -->
+            <div class="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                  ${isTr ? '3. Vercel\'da Ücretsiz Yayınlama (Deploy)' : '3. Free Deploy on Vercel'}
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold">${isTr ? 'Hazır' : 'Ready'}</span>
+              </div>
+              <p class="text-xs text-slate-300">
+                ${isTr 
+                  ? 'Projede Vercel için <code>vercel.json</code> ve Vite yapılandırması hazırdır. GitHub deponuza yükleyip Vercel paneline bağlayarak dünya çapında ücretsiz yayına alabilirsiniz.' 
+                  : 'Configured with vercel.json and Vite. Push to GitHub and connect to Vercel to publish worldwide for free.'
+                }
+              </p>
+            </div>
+
+            <div class="flex justify-end pt-2 border-t border-slate-800">
+              <button onclick="closeModal('install-modal-container')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white">${t('close')}</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '';
+    }
+
+    // Toggle Settings
+    function toggleLanguage() {
+      currentLang = currentLang === 'tr' ? 'en' : 'tr';
+      saveState();
+      renderNav();
+      renderMain();
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      saveState();
+      const btn = document.getElementById('btn-sound');
+      if (btn) btn.classList.toggle('text-slate-500', !soundEnabled);
+    }
+
+    function updateThemeUI() {
+      const btn = document.getElementById('btn-theme');
+      const isDark = currentTheme === 'dark';
+      if (btn) {
+        btn.title = isDark ? (currentLang === 'tr' ? 'Aydınlık Temaya Geç' : 'Switch to Light') : (currentLang === 'tr' ? 'Karanlık Temaya Geç' : 'Switch to Dark');
+        btn.innerHTML = isDark 
+          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`
+          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+      }
+    }
+
+    function applyTheme() {
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+      updateThemeUI();
+    }
+
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme();
+      saveState();
+      renderNav();
+      renderMain();
+    }
+
+    // Initialize App
+    applyTheme();
+    renderNav();
+    renderMain();
+  </script>
+</body>
+</html>

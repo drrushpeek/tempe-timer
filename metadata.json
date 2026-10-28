@@ -1,0 +1,6 @@
+{
+  "name": "Tempo | To-Do & Habit Tracker",
+  "description": "Modern glassmorphism task and habit tracker with subtasks, recurring cadence, daily summaries, and weekly analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
