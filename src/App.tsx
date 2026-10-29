@@ -19,7 +19,6 @@ import { WeeklyAnalyticsView } from './components/WeeklyAnalyticsView';
 import { DailySummaryModal } from './components/DailySummaryModal';
 import { DailySummariesListView } from './components/DailySummariesListView';
 import { TaskModal } from './components/TaskModal';
-import { InstallModal } from './components/InstallModal';
 
 import { 
   Plus, 
@@ -52,29 +51,6 @@ export default function App() {
   const [taskModalDefaultType, setTaskModalDefaultType] = useState<TaskType>('task');
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState<boolean>(false);
   const [currentSummary, setCurrentSummary] = useState<DailySummary | null>(null);
-  const [isInstallModalOpen, setIsInstallModalOpen] = useState<boolean>(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    };
-  }, []);
-
-  const handlePromptInstall = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      setDeferredPrompt(null);
-    }
-  };
 
   const t = translations[language];
 
@@ -453,7 +429,6 @@ export default function App() {
           onOpenNewModal={() => handleOpenCreateModal('task')}
           onOpenSummaryModal={handleOpenSummaryReport}
           onDownloadHtml={handleDownloadStandalone}
-          onOpenInstallModal={() => setIsInstallModalOpen(true)}
           pendingCount={pendingCount}
         />
 
@@ -498,7 +473,7 @@ export default function App() {
             <div className="space-y-4 sm:space-y-6">
               
               {/* Header Title & Quick Add Row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
                 <div>
                   <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">
                     {activeTab === 'focus' ? t.focusTitle : t.allTitle}
@@ -510,30 +485,43 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Quick Add Bar */}
-                <form onSubmit={handleQuickAdd} className="flex-1 max-w-md w-full">
-                  <div className={`flex items-center rounded-xl p-1 border transition-all ${
-                    theme === 'dark' 
-                      ? 'bg-slate-900/60 border-slate-800 focus-within:border-indigo-500' 
-                      : 'bg-white border-slate-200 shadow-sm focus-within:border-indigo-500'
-                  }`}>
-                    <input
-                      type="text"
-                      placeholder={t.quickAddPlaceholder}
-                      value={quickTitle}
-                      onChange={(e) => setQuickTitle(e.target.value)}
-                      className="w-full px-3 py-1.5 text-sm sm:text-xs bg-transparent focus:outline-none placeholder:text-slate-500"
-                    />
-                    <button
-                      type="submit"
-                      disabled={!quickTitle.trim()}
-                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold disabled:opacity-40 transition-all shrink-0 flex items-center gap-1"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span className="hidden xs:inline">{language === 'tr' ? 'Ekle' : 'Add'}</span>
-                    </button>
-                  </div>
-                </form>
+                {/* Quick Add Bar & Prominent New Item Action */}
+                <div className="flex items-center gap-2 flex-1 max-w-xl justify-end">
+                  <form onSubmit={handleQuickAdd} className="flex-1 w-full">
+                    <div className={`flex items-center rounded-xl p-1 border transition-all ${
+                      theme === 'dark' 
+                        ? 'bg-slate-900/60 border-slate-800 focus-within:border-indigo-500' 
+                        : 'bg-white border-slate-200 shadow-sm focus-within:border-indigo-500'
+                    }`}>
+                      <input
+                        type="text"
+                        placeholder={t.quickAddPlaceholder}
+                        value={quickTitle}
+                        onChange={(e) => setQuickTitle(e.target.value)}
+                        className="w-full px-3 py-1.5 text-sm sm:text-xs bg-transparent focus:outline-none placeholder:text-slate-500"
+                      />
+                      <button
+                        type="submit"
+                        disabled={!quickTitle.trim()}
+                        className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold disabled:opacity-40 transition-all shrink-0 flex items-center gap-1"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span className="hidden xs:inline">{language === 'tr' ? 'Hızlı Ekle' : 'Add'}</span>
+                      </button>
+                    </div>
+                  </form>
+
+                  {/* Primary Add Item Button */}
+                  <button
+                    type="button"
+                    onClick={() => handleOpenCreateModal('task')}
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all flex items-center gap-1.5 shrink-0 active:scale-95 whitespace-nowrap"
+                    title={language === 'tr' ? 'Yeni Öğe Ekle' : 'Add New Item'}
+                  >
+                    <Plus className="w-4 h-4 stroke-[2.5]" />
+                    <span>{language === 'tr' ? 'Yeni Öğe Ekle' : 'New Item'}</span>
+                  </button>
+                </div>
               </div>
 
               {/* Filters & Search Toolbar */}
@@ -674,17 +662,6 @@ export default function App() {
           language={language}
         />
       )}
-
-      {/* App Installation & Download Guide Modal */}
-      <InstallModal
-        isOpen={isInstallModalOpen}
-        onClose={() => setIsInstallModalOpen(false)}
-        language={language}
-        theme={theme}
-        onDownloadHtml={handleDownloadStandalone}
-        deferredPrompt={deferredPrompt}
-        onPromptInstall={handlePromptInstall}
-      />
 
     </div>
   );

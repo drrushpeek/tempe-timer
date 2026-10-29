@@ -6,7 +6,9 @@ import {
   X, 
   Trash2, 
   Repeat, 
-  ListTodo
+  ListTodo,
+  Plus,
+  Check
 } from 'lucide-react';
 
 interface TaskModalProps {
@@ -135,7 +137,7 @@ export const TaskModal: React.FC<TaskModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-hidden">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity"
@@ -143,31 +145,36 @@ export const TaskModal: React.FC<TaskModalProps> = ({
       />
 
       {/* Modal Dialog */}
-      <div className={`relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl border shadow-2xl p-4 sm:p-7 z-10 ${
+      <div className={`relative w-full max-w-lg max-h-[90vh] flex flex-col rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden z-10 ${
         theme === 'dark'
-          ? 'bg-slate-900/95 border-slate-700 text-slate-100'
-          : 'bg-white/95 border-slate-200 text-slate-900'
+          ? 'bg-slate-900 border-slate-700/80 text-slate-100'
+          : 'bg-white border-slate-200 text-slate-900'
       }`}>
         
-        {/* Modal Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800/40">
+        {/* Modal Header (Fixed at top) */}
+        <div className={`flex items-center justify-between p-4 sm:p-5 border-b shrink-0 ${
+          theme === 'dark' ? 'border-slate-800/80 bg-slate-900' : 'border-slate-200/80 bg-white'
+        }`}>
           <div>
-            <h2 className="text-lg font-bold">
-              {initialTask ? t.editTitle : t.createTitle}
+            <h2 className="text-base sm:text-lg font-bold">
+              {initialTask ? t.editTitle : (language === 'tr' ? 'Yeni Öğe Ekle' : t.createTitle)}
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
               {t.modalSubtitle}
             </p>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        {/* Modal Body & Form */}
+        <form id="task-form" onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
           
           {/* Type Selector (Task vs Habit) */}
           <div className="flex items-center p-1 rounded-xl bg-slate-950/40 border border-slate-800/80">
@@ -480,22 +487,36 @@ export const TaskModal: React.FC<TaskModalProps> = ({
             )}
           </div>
 
-          {/* Form Actions */}
-          <div className="pt-3 border-t border-slate-800/40 flex items-center justify-end gap-2">
+          </div>
+
+          {/* Form Actions (Sticky Footer - Always Visible at the bottom) */}
+          <div className={`p-3.5 sm:p-4 px-4 sm:px-6 border-t shrink-0 flex items-center justify-between sm:justify-end gap-3 ${
+            theme === 'dark' ? 'bg-slate-900 border-slate-800/80' : 'bg-slate-50 border-slate-200/80'
+          }`}>
             <button
               type="button"
               onClick={onClose}
-              className={`px-3.5 py-2 rounded-xl text-xs font-medium transition-colors ${
-                theme === 'dark' ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
+              className={`px-4 py-2.5 rounded-xl text-xs font-medium transition-colors ${
+                theme === 'dark' ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
               {t.cancelBtn}
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all"
+              className="flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
             >
-              {initialTask ? t.updateItemBtn : t.createItemBtn}
+              {initialTask ? (
+                <>
+                  <Check className="w-4 h-4 stroke-[2.5]" />
+                  <span>{t.updateItemBtn}</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="w-4 h-4 stroke-[2.5]" />
+                  <span>{language === 'tr' ? 'Yeni Öğe Ekle' : t.createItemBtn}</span>
+                </>
+              )}
             </button>
           </div>
 

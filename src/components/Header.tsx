@@ -14,8 +14,7 @@ import {
   Sparkles,
   ListTodo,
   Globe,
-  Download,
-  Smartphone
+  Download
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -30,7 +29,6 @@ interface HeaderProps {
   onOpenNewModal: () => void;
   onOpenSummaryModal: () => void;
   onDownloadHtml: () => void;
-  onOpenInstallModal: () => void;
   pendingCount: number;
 }
 
@@ -46,7 +44,6 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenNewModal,
   onOpenSummaryModal,
   onDownloadHtml,
-  onOpenInstallModal,
   pendingCount,
 }) => {
   const t = translations[language];
@@ -174,20 +171,6 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <FileText className="w-3.5 h-3.5 text-indigo-400" />
               <span>{t.dailyReportBtn}</span>
-            </button>
-
-            {/* Install / Download App Button */}
-            <button
-              onClick={onOpenInstallModal}
-              title={language === 'tr' ? 'Uygulamayı Yükle (Telefon & Masaüstü)' : 'Install App (Mobile & Desktop)'}
-              className={`hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium border transition-colors whitespace-nowrap ${
-                theme === 'dark'
-                  ? 'border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 hover:text-white'
-                  : 'border-indigo-300 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-900'
-              }`}
-            >
-              <Smartphone className="w-3.5 h-3.5 text-indigo-400" />
-              <span>{language === 'tr' ? 'Yükle' : 'Install'}</span>
             </button>
 
             {/* Download Standalone HTML Button */}

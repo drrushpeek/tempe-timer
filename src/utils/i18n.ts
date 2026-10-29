@@ -323,7 +323,7 @@ export const translations = {
     addBtn: 'Ekle',
     cancelBtn: 'İptal',
     saveItemBtn: 'Öğeyi Kaydet',
-    createItemBtn: 'Öğe Oluştur',
+    createItemBtn: 'Yeni Öğe Ekle',
     updateItemBtn: 'Güncelle',
   },
 };
